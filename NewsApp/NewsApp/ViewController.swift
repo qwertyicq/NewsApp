@@ -6,13 +6,23 @@
 //
 
 import UIKit
-//import Alamofire
+import Kingfisher
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var array: [News]? {
+    let loadDataOperation = BlockOperation {
+        APIManager.shared.fetchArticlesFromApi()
+    }
+    
+    let checkDataLoad = BlockOperation {
+        while APIManager.dataArray?.articlesArray == nil {
+            
+        }
+    }
+    
+    var array: [News] = [News]() {
         didSet {
             DispatchQueue.main.async{
                 self.tableView.reloadData()
@@ -29,39 +39,64 @@ class ViewController: UIViewController {
         
         tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         
-        APIManager.shared.fetchArticlesFromApi()
+        checkDataLoad.addDependency(loadDataOperation)
         
-        //getInfo()
-        
+        DispatchQueue.global(qos: .background).async {
+            self.loadDataOperation.start()
+            self.checkDataLoad.start()
+            
+            guard let unwrDataArray = APIManager.dataArray?.articlesArray else { return }
+            
+            for item in unwrDataArray {
+                self.array.append(item)
+            }
+        }
     }
-    
     
 }
 
+// Делигаты UITableView
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return array.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! CustomTableViewCell
         
-        //cell.labelHead.text = array[indexPath.row].title
+        cell.titleLabel.text = array[indexPath.row].title
+        cell.descriptionLabel.text = array[indexPath.row].description
+        
+        guard let unwrUrlImage = array[indexPath.row].urlToImage else { return cell }
+        
+        cell.imageNews.kf.setImage(with: URL(string: unwrUrlImage))
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showDetailedNews", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let unwrRow = tableView.indexPathForSelectedRow?.row,
+              let unwrIndexPathForRow = tableView.indexPathForSelectedRow else {
+            return
+        }
+        
+        if let destinationViewController = segue.destination as? DetailNewsViewController {
+            
+            destinationViewController.urlString = array[unwrRow].urlToNews
+            
+            tableView.deselectRow(at: unwrIndexPathForRow, animated: true)
+            
+        }
+    }
 }
-
-//extension ViewController {
-//    private func getInfo(){
-//        AF.request("https://newsapi.org/v2/top-headlines?country=us&from=2021-11-14&apiKey=7bb94fc0595647539e9fe359fef6496b", method: .get).responseJSON { responseData in
-//            let result =  try! responseData.result.get()
-//            print(result)
-//
-//
-//        }
-//    }
-//}
 

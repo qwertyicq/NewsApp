@@ -11,4 +11,6 @@ target 'NewsApp' do
 
   pod 'ObjectMapper'
 
+  pod 'Kingfisher', '~> 7.0'
+
 end

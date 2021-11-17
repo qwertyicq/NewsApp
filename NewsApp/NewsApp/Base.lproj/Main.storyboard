@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -24,19 +25,55 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="3qv-F6-KpV" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="005-cK-Nmn"/>
                             <constraint firstItem="3qv-F6-KpV" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Ajv-0G-pp2"/>
-                            <constraint firstItem="3qv-F6-KpV" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="IT3-VZ-Fpx"/>
+                            <constraint firstItem="3qv-F6-KpV" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="Vcc-T7-gTc"/>
                             <constraint firstItem="3qv-F6-KpV" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="W7U-jE-TxT"/>
-                            <constraint firstItem="3qv-F6-KpV" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="tfR-aE-NfH"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="3qv-F6-KpV" id="d4X-bD-KMX"/>
+                        <segue destination="FHu-SF-mVJ" kind="show" identifier="showDetailedNews" id="YSr-DQ-f7R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="20" y="82"/>
+        </scene>
+        <!--Detail News View Controller-->
+        <scene sceneID="Ag9-hw-Gw1">
+            <objects>
+                <viewController id="FHu-SF-mVJ" customClass="DetailNewsViewController" customModule="NewsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hQX-4t-HFE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y3n-AB-wnu">
+                                <rect key="frame" x="0.0" y="25" width="414" height="758"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JpC-eB-RZS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="y3n-AB-wnu" firstAttribute="width" secondItem="hQX-4t-HFE" secondAttribute="width" id="C5q-ke-1Qu"/>
+                            <constraint firstItem="y3n-AB-wnu" firstAttribute="centerY" secondItem="JpC-eB-RZS" secondAttribute="centerY" id="E2l-zf-4TA"/>
+                            <constraint firstItem="y3n-AB-wnu" firstAttribute="height" secondItem="hQX-4t-HFE" secondAttribute="height" multiplier="0.9" id="Ggs-8T-XPV"/>
+                            <constraint firstItem="y3n-AB-wnu" firstAttribute="centerX" secondItem="JpC-eB-RZS" secondAttribute="centerX" id="ZQh-x4-jII"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="a9g-Y2-9p9"/>
+                    <connections>
+                        <outlet property="webBrowser" destination="y3n-AB-wnu" id="hME-si-naW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kUE-aF-1r9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="843" y="89"/>
         </scene>
     </scenes>
     <resources>

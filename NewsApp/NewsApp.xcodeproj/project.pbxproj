@@ -18,6 +18,7 @@
 		881086D3274287FB00A70866 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 881086D1274287FB00A70866 /* CustomTableViewCell.xib */; };
 		881086D52742938900A70866 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881086D42742938900A70866 /* DataModel.swift */; };
 		881086D7274506A700A70866 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881086D6274506A700A70866 /* NetworkLayer.swift */; };
+		881086D92745317100A70866 /* DetailNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881086D82745317100A70866 /* DetailNewsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		881086D1274287FB00A70866 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		881086D42742938900A70866 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		881086D6274506A700A70866 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
+		881086D82745317100A70866 /* DetailNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNewsViewController.swift; sourceTree = "<group>"; };
 		91B9F43FF00FCF7552FEDF0A /* Pods-NewsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsApp.release.xcconfig"; path = "Target Support Files/Pods-NewsApp/Pods-NewsApp.release.xcconfig"; sourceTree = "<group>"; };
 		FED90467CCC7B3BC5EE7F187 /* Pods-NewsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsApp.debug.xcconfig"; path = "Target Support Files/Pods-NewsApp/Pods-NewsApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +81,7 @@
 				881086D0274287FB00A70866 /* CustomTableViewCell.swift */,
 				881086D1274287FB00A70866 /* CustomTableViewCell.xib */,
 				881086C2274287C000A70866 /* Main.storyboard */,
+				881086D82745317100A70866 /* DetailNewsViewController.swift */,
 				881086C5274287C100A70866 /* Assets.xcassets */,
 				881086C7274287C100A70866 /* LaunchScreen.storyboard */,
 				881086CA274287C100A70866 /* Info.plist */,
@@ -225,6 +228,7 @@
 				881086BD274287C000A70866 /* AppDelegate.swift in Sources */,
 				881086D2274287FB00A70866 /* CustomTableViewCell.swift in Sources */,
 				881086BF274287C000A70866 /* SceneDelegate.swift in Sources */,
+				881086D92745317100A70866 /* DetailNewsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
