@@ -12,19 +12,17 @@ import ObjectMapper
 class APIManager {
     static let shared = APIManager()
     
-    static var dataArray: NewsApiResponse?
-    
     let API_URL: String = "https://newsapi.org/v2/top-headlines?country=ru&from=2021-11-17&apiKey=7bb94fc0595647539e9fe359fef6496b"
     
     private init() {
         
     }
     
-    func fetchArticlesFromApi() {
+    func fetchArticlesFromApi(complition: @escaping (NewsApiResponse?) -> Void) {
         AF.request(API_URL).responseString { response in
             switch response.result {
             case .success(let responseData):
-                APIManager.dataArray = NewsApiResponse(JSONString: responseData)
+                complition(NewsApiResponse(JSONString: responseData))
             case .failure(let error):
                 print(error)
             }

@@ -12,16 +12,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let loadDataOperation = BlockOperation {
-        APIManager.shared.fetchArticlesFromApi()
-    }
-    
-    let checkDataLoad = BlockOperation {
-        while APIManager.dataArray?.articlesArray == nil {
-            
-        }
-    }
-    
     var array: [News] = [News]() {
         didSet {
             DispatchQueue.main.async{
@@ -39,16 +29,13 @@ class ViewController: UIViewController {
         
         tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         
-        checkDataLoad.addDependency(loadDataOperation)
-        
         DispatchQueue.global(qos: .background).async {
-            self.loadDataOperation.start()
-            self.checkDataLoad.start()
-            
-            guard let unwrDataArray = APIManager.dataArray?.articlesArray else { return }
-            
-            for item in unwrDataArray {
-                self.array.append(item)
+            APIManager.shared.fetchArticlesFromApi { data in
+                guard let data = data else { return }
+                
+                for item in data.articlesArray {
+                    self.array.append(item)
+                }
             }
         }
     }
@@ -87,8 +74,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let unwrRow = tableView.indexPathForSelectedRow?.row,
               let unwrIndexPathForRow = tableView.indexPathForSelectedRow else {
-            return
-        }
+                  return
+              }
         
         if let destinationViewController = segue.destination as? DetailNewsViewController {
             
